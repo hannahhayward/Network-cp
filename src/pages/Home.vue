@@ -1,0 +1,55 @@
+<template>
+  <div class="container-fluid">
+    <div class="row bg-dark">
+      <div class="col-2">
+        <Ad v-for="a in ads" :key="a.title" :ad="a" />
+      </div>
+      <div class="col-8">
+        <CreatePost />
+        <Post v-for="p in posts" :key="p.id" :post="p" />
+      </div>
+      <div class="col-2">
+        <Profile />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { postService } from '../services/PostService'
+import { adService } from '../services/AdService'
+import { computed, onMounted } from 'vue'
+// import Post from '../components/Post.vue'
+import { logger } from '../utils/Logger'
+import { AppState } from '../AppState'
+export default {
+  name: 'Home',
+  setup() {
+    onMounted(() => {
+      try {
+        postService.getPosts()
+        adService.getAds()
+        // postService.createPost(FormData)
+      } catch (error) {
+        logger.log(error)
+      }
+    })
+    return {
+      ads: computed(() => AppState.ads),
+      posts: computed(() => AppState.posts)
+    }
+  }
+}
+
+</script>
+
+<style scoped lang="scss">
+.home{
+  text-align: center;
+  user-select: none;
+  > img{
+    height: 200px;
+    width: 200px;
+  }
+}
+</style>
