@@ -10,14 +10,15 @@
       <div>
         <img :src="post.creator.picture" alt="" class="p-pic rounded-pill mx-1">
         {{ post.creator.name }}
-        <i class="fas fa-thumbs-up"> {{ post.creator.likes }} </i>
+        <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
+        <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 // import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
 import { logger } from '../utils/Logger'
@@ -27,6 +28,9 @@ import { AppState } from '../AppState'
 export default {
   props: { post: { type: Object, required: true } },
   setup(props) {
+    const state = reactive({
+      posts: computed(() => AppState.posts)
+    })
     onMounted(() => {
       try {
         postService.getPosts()
@@ -35,7 +39,11 @@ export default {
       }
     })
     return {
-      posts: computed(() => AppState.posts)
+      state,
+      posts: computed(() => AppState.posts),
+      likePost(post) {
+        postService.likePost(post)
+      }
     }
   }
 

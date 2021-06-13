@@ -11,8 +11,8 @@
       </div>
       <div class="card-footer">
         <div>
-          <i class="fas fa-thumbs-up"> {{ post.creator.likes }} </i>
-          <button class="btn btn-danger" @click="deletePost(post._id)">
+          <i class="fas fa-thumbs-up"> {{ post.likes.length }} </i>
+          <button class="btn btn-danger" @click="deletePost(post)">
             delete
           </button>
         </div>
@@ -22,20 +22,29 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
 import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 // import { postService } from '../services/PostService'
 // import { logger } from '../utils/Logger'
 export default {
   props: { post: { type: Object, required: true } },
   setup(props) {
-    deletePost(post._id) {
-      postService.deletePost(post._id)
-    }
+    const state = reactive({
+      posts: computed(() => AppState.activeUserPosts._id)
+    })
 
     return {
+      state,
+      // likes(post) {
+      //   postService.likePost(post)
+      // },
+      deletePost(post) {
+        logger.log(post, 'post id')
+        postService.deletePost(post)
+      },
       userPosts: computed(() => AppState.activeUserPosts)
     }
   }
