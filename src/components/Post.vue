@@ -16,7 +16,6 @@
         </router-link>
         {{ post.creator.name }}
         <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
-        <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
       </div>
     </div>
   </div>

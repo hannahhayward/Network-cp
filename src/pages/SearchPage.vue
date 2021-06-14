@@ -11,9 +11,9 @@
         <div>
           <SearchResults v-for="p in searchResults" :key="p" :post="p" />
         </div>
-        <div class="col-2">
+        <!-- <div class="col-2">
           <Ad v-for="a in ads" :key="a.title" :ad="a" />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

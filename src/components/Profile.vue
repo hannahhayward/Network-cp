@@ -22,9 +22,11 @@
         <button class="btn-block btn btn-danger">
           Log out
         </button>
-        <button class="btn-block btn btn-info">
-          Edit your account
-        </button>
+        <router-link :to="{ name: 'Account', params:{id: account.id} }" :key="account.id">
+          <button class="btn-block btn btn-info">
+            Edit your account
+          </button>
+        </router-link>
       </div>
     </div>
   </div>
