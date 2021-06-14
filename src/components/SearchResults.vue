@@ -12,7 +12,7 @@
     <div class="card-footer">
       <div>
         <router-link :to="{ name: 'Profile', params:{id: post.creatorId} }" :key="post.creatorId">
-          <img :src="posts.creator.picture" alt="" class="p-pic rounded-pill mx-1" @click="getProfile(post.creator.id)">
+          <img :src="post.picture" alt="" class="p-pic rounded-pill mx-1" @click="getProfile(post.creator.id)">
         </router-link>
         <!-- {{ post.creator.name }} -->
         <!-- <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i> -->

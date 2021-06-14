@@ -9,7 +9,7 @@
           <Search />
         </div>
         <div>
-          <SearchResults v-for="p in searchResults" :key="p" :post="p" />
+          <SearchResults v-for="s in searchResults" :key="s" :post="s" />
         </div>
         <!-- <div class="col-2">
           <Ad v-for="a in ads" :key="a.title" :ad="a" />
