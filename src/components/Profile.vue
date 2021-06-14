@@ -11,12 +11,12 @@
   </div> -->
   <div class="card text-light">
     <div class="card-header text-center">
-      <img src="https://i.pinimg.com/originals/bb/a2/b5/bba2b59ada9b0880079ca964eda95085.jpg" alt="" class="rounded-pill size">
+      <img :src="activeProfile.picture" alt="" class="rounded-pill size">
       <h6 class="mt-3">
-        {{ account.name }}
+        {{ activeProfile.name }}
       </h6>
       <div class="card-body">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quidem fuga mollitia modi quod animi debitis iste nemo, nisi ab vitae quasi velit libero repellat dicta quo voluptatum fugiat sunt?</p>
+        <p>{{ activeProfile.bio }}</p>
       </div>
       <div class="card-footer">
         <button class="btn-block btn btn-danger">
@@ -36,6 +36,7 @@ import { AppState } from '../AppState'
 export default {
   setup() {
     return {
+      activeProfile: computed(() => AppState.activeProfile),
       account: computed(() => AppState.account)
 
     }

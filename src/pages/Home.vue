@@ -5,11 +5,11 @@
         <Ad v-for="a in ads" :key="a.title" :ad="a" />
       </div>
       <div class="col-8">
-        <CreatePost />
+        <CreatePost v-if="user.isAuthenticated" />
         <Post v-for="p in posts" :key="p.id" :post="p" />
       </div>
       <div class="col-2">
-        <Profile />
+        <Account />
       </div>
     </div>
   </div>
@@ -36,7 +36,8 @@ export default {
     })
     return {
       ads: computed(() => AppState.ads),
-      posts: computed(() => AppState.posts)
+      posts: computed(() => AppState.posts),
+      user: computed(() => AppState.user)
     }
   }
 }

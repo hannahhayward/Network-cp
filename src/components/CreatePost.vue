@@ -23,7 +23,7 @@ export default {
         try {
           await postService.createPost(state.newPost)
         } catch (error) {
-          Notification.toast(error)
+          Notification.toast('please sign in or make an account')
         }
       }
     }

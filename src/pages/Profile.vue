@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid bg-img text-light">
+  <div class="container-fluid text-light" :style="{ backgroundImage: `url(${activeProfile.coverImg})` || none}">
     <div class="row">
       <div class="col-2 mt-1 bg-dark">
         <Profile />
@@ -37,6 +37,7 @@ export default {
     return {
       state,
       account: computed(() => AppState.account),
+      activeProfile: computed(() => AppState.activeProfile),
       userPosts: computed(() => AppState.activeUserPosts)
     }
   }

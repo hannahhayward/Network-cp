@@ -32,6 +32,14 @@ class PostService {
     const res = await api.post('api/posts', newPost)
     AppState.posts = res.data
   }
+
+  async findPosts() {
+    const res = await api.get(`api/posts?query=${AppState.currentQuery}`)
+    // AppState.posts = res.data.results.map(p => new Post(p))
+    logger.log(res, 'search results')
+    AppState.searchResults = res.data
+    logger.log(AppState.searchResults, 'appstate')
+  }
 }
 
 export const postService = new PostService()

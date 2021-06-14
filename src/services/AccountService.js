@@ -11,6 +11,17 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+
+  async editProfile(account) {
+    logger.log(account, 'reached the service')
+    const res = await api.put(`api/profile/${AppState.account.id}`, account)
+    logger.log(res, 'did they go through?')
+    // let formData = {
+    //  picture = form.photo.value,
+    //  coverImg = form.coverImg.value,
+    //  name = form.name.val
+    // }
+  }
 }
 
 export const accountService = new AccountService()

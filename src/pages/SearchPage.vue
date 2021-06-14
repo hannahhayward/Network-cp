@@ -5,16 +5,15 @@
         <Ad v-for="a in ads" :key="a.title" :ad="a" />
       </div>
       <div class="col-8">
-        <input type="text" placeholder="search" class="form-control">
-        <button class="btn btn-success btn-block">
-          Search
-        </button>
         <div>
-          search results here
+          <Search />
         </div>
-      </div>
-      <div class="col-2">
-        <Ad v-for="a in ads" :key="a.title" :ad="a" />
+        <div>
+          <SearchResults v-for="p in searchResults" :key="p" :post="p" />
+        </div>
+        <div class="col-2">
+          <Ad v-for="a in ads" :key="a.title" :ad="a" />
+        </div>
       </div>
     </div>
   </div>
@@ -36,6 +35,7 @@ export default {
       }
     })
     return {
+      searchResults: computed(() => AppState.searchResults),
       ads: computed(() => AppState.ads)
     }
   }
