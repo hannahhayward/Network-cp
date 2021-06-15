@@ -14,7 +14,7 @@ class AccountService {
 
   async editProfile(account) {
     logger.log(account, 'reached the service')
-    const res = await api.put(`api/profile/${AppState.account.id}`, account)
+    const res = await api.put('account/', account)
     logger.log(res, 'did they go through?')
     // let formData = {
     //  picture = form.photo.value,

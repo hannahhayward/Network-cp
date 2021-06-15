@@ -15,13 +15,10 @@ class PostService {
   }
 
   async likePost(post) {
-    // const posts = AppState.posts.find(p => p.id === post)
-    // const post = p.likes.push(AppState.account.id)
-    post.likes.push(AppState.account.id)
-
-    logger.log(post)
-    await api.put('api/posts/' + post._id, post)
-    logger.log(post)
+    logger.log(post, 'post in service')
+    const res = await api.post(`api/posts/${post.id}/like`)
+    logger.log(res, 'did it like')
+    AppState.posts = res.data
   }
 
   async deletePost(post) {
@@ -36,8 +33,8 @@ class PostService {
   async findPosts() {
     const res = await api.get(`api/posts?query=${AppState.currentQuery}`)
     // AppState.posts = res.data.results.map(p => new Post(p))
-    logger.log(res, 'search results')
-    AppState.searchResults = res.data
+    logger.log(res.data.posts, 'search results')
+    AppState.searchResults = res.data.posts
     logger.log(AppState.searchResults, 'appstate')
   }
 }

@@ -13,18 +13,23 @@
 import { reactive } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
+import Notification from '../utils/Notification'
 export default {
-  setup() {
+  props: { post: { type: Object, required: true } },
+  setup(props) {
     const state = reactive({
       query: ''
     })
     return {
       state,
       findPosts() {
-        AppState.currentPage = 1
         AppState.currentQuery = state.query
-        postService.findPosts()
-        state.query = ''
+        try {
+          postService.findPosts()
+          state.query = ''
+        } catch (error) {
+          Notification.toast(error, error)
+        }
       }
     }
   }

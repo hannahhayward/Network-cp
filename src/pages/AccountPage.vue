@@ -14,7 +14,7 @@
                      aria-label="photo url"
                      class="form-control bg-transparent"
                      id="photo"
-                     v-model="state.edits.picture"
+                     v-model="state.account.picture"
               >
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
@@ -26,7 +26,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Cover image url</span>
               </div>
-              <input type="text" placeholder="cover image url" aria-label="coverImage url" class="form-control bg-transparent" v-model="state.edits.coverImg">
+              <input type="text" placeholder="cover image url" aria-label="coverImage url" class="form-control bg-transparent text-primary" v-model="state.account.coverImg">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -37,7 +37,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Name</span>
               </div>
-              <input type="text" :placeholder="account.name" aria-label="account name" class="form-control bg-transparent" v-model="state.edits.name">
+              <input type="text" :placeholder="account.name" aria-label="account name" class="form-control bg-transparent text-primary" v-model="state.account.name">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -48,7 +48,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Bio</span>
               </div>
-              <input type="text" :placeholder="account.bio || 'bio'" aria-label="bio" class="form-control bg-transparent" v-model="state.edits.bio">
+              <input type="text" :placeholder="account.bio || 'bio'" aria-label="bio" class="form-control bg-transparent text-primary" v-model="state.account.bio">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -59,7 +59,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Github url</span>
               </div>
-              <input type="text" :placeholder="account.github || 'github'" aria-label="github" class="form-control bg-transparent" v-model="state.edits.github">
+              <input type="text" :placeholder="account.github || 'github'" aria-label="github" class="form-control bg-transparent text-primary" v-model="state.account.github">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -70,7 +70,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">LinkedIn url</span>
               </div>
-              <input type="text" :placeholder="account.linkedin || 'linkedin'" aria-label="linkedin" class="form-control bg-transparent" v-model="state.edits.linkedin">
+              <input type="text" :placeholder="account.linkedin || 'linkedin'" aria-label="linkedin" class="form-control bg-transparent text-primary" v-model="state.account.linkedin">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -81,7 +81,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Resume url</span>
               </div>
-              <input type="text" :placeholder="account.resume || 'resume url'" aria-label="resume" class="form-control bg-transparent" v-model="state.edits.resume">
+              <input type="text" :placeholder="account.resume || 'resume url'" aria-label="resume" class="form-control bg-transparent text-primary" v-model="state.account.resume">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -92,7 +92,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Class</span>
               </div>
-              <input type="text" :placeholder="account.class || 'class url'" aria-label="class" class="form-control bg-transparent" v-model="state.edits.class">
+              <input type="text" :placeholder="account.class || 'class url'" aria-label="class" class="form-control bg-transparent text-primary" v-model="state.account.class">
             <!-- <div class="input-group-append">
               <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
                 submit
@@ -121,46 +121,55 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
 import { logger } from '../utils/Logger'
+import Notification from '../utils/Notification'
 export default {
   name: 'Profile',
   setup() {
     const state = reactive({
       // newInfo: {}
-      // account: computed(() => AppState.account),
-      edits: {
-        picture: '',
-        coverImg: '',
-        name: '',
-        bio: '',
-        github: '',
-        linkedin: '',
-        resume: '',
-        class: '',
-        id: ''
-      }
+      account: computed(() => AppState.account)
+      // account: {
+      //   picture: '',
+      //   coverImg: '',
+      //   name: '',
+      //   bio: '',
+      //   github: '',
+      //   linkedin: '',
+      //   resume: '',
+      //   class: '',
+      //   id: ''
+      // }
     })
     return {
       state,
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
+      async editProfile(account) {
+        try {
+          await accountService.editProfile(state.account)
+          logger.log(state.account, 'account')
+        } catch (error) {
+          Notification.toast(error, error)
+        }
+      },
       setEdit(account) {
-        state.edits.picture = account.picture
-        state.edits.coverImg = account.coverImg
-        state.edits.name = account.name
-        state.edits.bio = account.bio
-        state.edits.github = account.github
-        state.edits.linkedin = account.linkedin
-        state.edits.class = account.class
-        state.edits.id = account.id
-        // logger.log(state.edits, 'setedit')
+        state.account.picture = account.picture
+        state.account.coverImg = account.coverImg
+        state.account.name = account.name
+        state.account.bio = account.bio
+        state.account.github = account.github
+        state.account.linkedin = account.linkedin
+        state.account.class = account.class
+        state.account.id = account.id
+        // logger.log(state.account, 'setedit')
         // this.editProfile()
       },
-      async editProfile(edits) {
-        accountService.editProfile(state.edits)
-        logger.log(state.edits, 'edits')
-      },
       changePicture() {
-        accountService.changePicture(state.newInfo)
+        try {
+          accountService.changePicture(state.newInfo)
+        } catch (error) {
+          Notification.toast(error, error)
+        }
       }
     }
   }
@@ -169,5 +178,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.size{
+  height: 15vh;
+  width: 15vh;
+}
 </style>

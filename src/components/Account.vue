@@ -14,7 +14,7 @@
           Login
         </button>
       </div> -->
-      <div class="card-footer">
+      <div class="card-footer" v-if="account">
         <router-link :to="{ name: 'Account', params:{id: account.id} }" :key="account.id">
           <button class="btn-block btn btn-info">
             Edit your account
@@ -33,21 +33,20 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { AuthService } from '../services/AuthService'
 export default {
   setup() {
     return {
       account: computed(() => AppState.account),
-      user: computed(() => AppState.user),
-      async login() {
-        AuthService.loginWithPopup()
-      }
+      user: computed(() => AppState.user)
     }
   }
 
 }
 </script>
 
-<style>
-
+<style scoped>
+.size{
+  height: 20vh;
+  width: 10vw;
+}
 </style>

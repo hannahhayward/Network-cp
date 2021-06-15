@@ -19,9 +19,8 @@
 import { postService } from '../services/PostService'
 import { adService } from '../services/AdService'
 import { computed, onMounted } from 'vue'
-// import Post from '../components/Post.vue'
-import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
+import Notification from '../utils/Notification'
 export default {
   name: 'Home',
   setup() {
@@ -29,9 +28,8 @@ export default {
       try {
         postService.getPosts()
         adService.getAds()
-        // postService.createPost(FormData)
       } catch (error) {
-        logger.log(error)
+        Notification.toast(error, error)
       }
     })
     return {

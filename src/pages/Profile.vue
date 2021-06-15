@@ -5,7 +5,7 @@
         <Profile />
       </div>
       <div class="col-8 mt-5">
-        <CreatePost />
+        <CreatePost v-if="activeProfile.id === account.id" />
         <UserPosts v-for="p in userPosts" :key="p.id" :post="p" />
       </div>
     </div>
@@ -19,6 +19,7 @@ import { logger } from '../utils/Logger'
 import { postService } from '../services/PostService'
 import { profileService } from '../services/ProfileService'
 import { useRoute } from 'vue-router'
+import Notification from '../utils/Notification'
 export default {
   name: 'Account',
   setup() {
@@ -30,7 +31,7 @@ export default {
         await postService.getUserPosts('api/posts?creatorId=' + route.params.id)
         logger.log(route.params.id)
       } catch (error) {
-        logger.log(error)
+        Notification.toast(error, error)
       }
     })
 

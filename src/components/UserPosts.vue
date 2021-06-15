@@ -12,7 +12,7 @@
       <div class="card-footer">
         <div>
           <i class="fas fa-thumbs-up"> {{ post.likes.length }} </i>
-          <button class="btn btn-danger" @click="deletePost(post)">
+          <button class="btn btn-danger" @click="deletePost(post)" v-if="user.id === account.id">
             delete
           </button>
         </div>
@@ -26,9 +26,7 @@ import { computed, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
 import { logger } from '../utils/Logger'
-// import { logger } from '../utils/Logger'
-// import { postService } from '../services/PostService'
-// import { logger } from '../utils/Logger'
+import Notification from '../utils/Notification'
 export default {
   props: { post: { type: Object, required: true } },
   setup(props) {
@@ -38,14 +36,17 @@ export default {
 
     return {
       state,
-      // likes(post) {
-      //   postService.likePost(post)
-      // },
       deletePost(post) {
-        logger.log(post, 'post id')
-        postService.deletePost(post)
+        try {
+          logger.log(post, 'post id')
+          postService.deletePost(post)
+        } catch (error) {
+          Notification.toast(error, error)
+        }
       },
-      userPosts: computed(() => AppState.activeUserPosts)
+      userPosts: computed(() => AppState.activeUserPosts),
+      user: computed(() => AppState.activeProfile),
+      account: computed(() => AppState.account)
     }
   }
 }

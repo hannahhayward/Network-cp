@@ -9,7 +9,12 @@
           <Search />
         </div>
         <div>
-          <SearchResults v-for="s in searchResults" :key="s" :post="s" />
+          <SearchResults v-for="s in results" :key="s.id" :post="s" />
+          <!-- <div v-for="r in results" :key="r">
+            <div class="bg-light text-dark">
+              <h2> {{ results.body }} </h2>
+            </div>
+          </div> -->
         </div>
         <!-- <div class="col-2">
           <Ad v-for="a in ads" :key="a.title" :ad="a" />
@@ -22,8 +27,8 @@
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
 import { adService } from '../services/AdService'
+import Notification from '../utils/Notification'
 export default {
   name: 'SearchPage',
   setup() {
@@ -31,11 +36,11 @@ export default {
       try {
         adService.getAds()
       } catch (error) {
-        logger.log(error)
+        Notification.toast(error, error)
       }
     })
     return {
-      searchResults: computed(() => AppState.searchResults),
+      results: computed(() => AppState.searchResults),
       ads: computed(() => AppState.ads)
     }
   }
