@@ -16,88 +16,48 @@
                      id="photo"
                      v-model="state.account.picture"
               >
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group cover-img outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Cover image url</span>
               </div>
               <input type="text" placeholder="cover image url" aria-label="coverImage url" class="form-control bg-transparent text-primary" v-model="state.account.coverImg">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group name outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Name</span>
               </div>
               <input type="text" :placeholder="account.name" aria-label="account name" class="form-control bg-transparent text-primary" v-model="state.account.name">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group bio outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Bio</span>
               </div>
               <input type="text" :placeholder="account.bio || 'bio'" aria-label="bio" class="form-control bg-transparent text-primary" v-model="state.account.bio">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group github outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Github url</span>
               </div>
               <input type="text" :placeholder="account.github || 'github'" aria-label="github" class="form-control bg-transparent text-primary" v-model="state.account.github">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group linkedin outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">LinkedIn url</span>
               </div>
               <input type="text" :placeholder="account.linkedin || 'linkedin'" aria-label="linkedin" class="form-control bg-transparent text-primary" v-model="state.account.linkedin">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group resume outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Resume url</span>
               </div>
               <input type="text" :placeholder="account.resume || 'resume url'" aria-label="resume" class="form-control bg-transparent text-primary" v-model="state.account.resume">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <div class="input-group class outline-light my-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Class</span>
               </div>
               <input type="text" :placeholder="account.class || 'class url'" aria-label="class" class="form-control bg-transparent text-primary" v-model="state.account.class">
-            <!-- <div class="input-group-append">
-              <button class="btn text-light btn-outline-light" type="button" id="button-addon2">
-                submit
-              </button>
-            </div> -->
             </div>
             <input type="text" class="d-none">
             <div class="buttons">
@@ -114,10 +74,6 @@
 
 <script>
 import { computed, reactive } from '@vue/runtime-core'
-// import { useRoute } from 'vue-router'
-// import { logger } from '../utils/Logger'
-// import { profileService } from '../services/ProfileService'
-// import { postService } from '../services/PostService'
 import { AppState } from '../AppState'
 import { accountService } from '../services/AccountService'
 import { logger } from '../utils/Logger'
@@ -125,21 +81,7 @@ import Notification from '../utils/Notification'
 export default {
   name: 'Profile',
   setup() {
-    const state = reactive({
-      // newInfo: {}
-      account: computed(() => AppState.account)
-      // account: {
-      //   picture: '',
-      //   coverImg: '',
-      //   name: '',
-      //   bio: '',
-      //   github: '',
-      //   linkedin: '',
-      //   resume: '',
-      //   class: '',
-      //   id: ''
-      // }
-    })
+    const state = reactive({ account: computed(() => AppState.account) })
     return {
       state,
       account: computed(() => AppState.account),
@@ -161,8 +103,6 @@ export default {
         state.account.linkedin = account.linkedin
         state.account.class = account.class
         state.account.id = account.id
-        // logger.log(state.account, 'setedit')
-        // this.editProfile()
       },
       changePicture() {
         try {
