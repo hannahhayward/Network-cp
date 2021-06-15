@@ -9,15 +9,6 @@
       </p>
       <img :src="post.imgUrl" alt="" class="w-100">
     </div>
-    <!-- <div class="card-footer">
-      <div>
-        <router-link :to="{ name: 'Profile', params:{id: post.creatorId} }" :key="post.creatorId">
-          <img :src="post.picture" alt="" class="p-pic rounded-pill mx-1">
-        </router-link>
-        {{ post.creator.name }}
-        <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
-      </div>
-    </div> -->
   </div>
 </template>
 

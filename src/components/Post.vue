@@ -23,14 +23,11 @@
 
 <script>
 import { computed, onMounted, reactive } from '@vue/runtime-core'
-// import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
 import { profileService } from '../services/ProfileService'
 import Notification from '../utils/Notification'
-// import { onMounted } from '@vue/runtime-core'
-// import { postService } from '../services/PostService'
 export default {
   props: { post: { type: Object, required: true } },
   setup(props) {

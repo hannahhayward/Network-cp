@@ -11,7 +11,7 @@
       </div>
       <div class="card-footer">
         <div>
-          <i class="fas fa-thumbs-up" @click="likePost(post)"> {{ post.likes.length }} </i>
+          <i class="fas fa-thumbs-up"> {{ post.likes.length }} </i>
           <button class="btn btn-danger" @click="deletePost(post)" v-if="user.id === account.id">
             delete
           </button>
@@ -40,15 +40,6 @@ export default {
         try {
           logger.log(post, 'post id')
           postService.deletePost(post)
-        } catch (error) {
-          Notification.toast(error, error)
-        }
-      },
-      likePost(post) {
-        // post.likes.length += 1
-        logger.log(post, 'post')
-        try {
-          postService.likePost(post)
         } catch (error) {
           Notification.toast(error, error)
         }

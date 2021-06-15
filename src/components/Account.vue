@@ -8,12 +8,6 @@
       <div class="card-body">
         <p>{{ account.bio }}</p>
       </div>
-      <!-- <div class="card text-light bg-dark" v-if="!user.isAuthenicated">
-        <h3>sign in or create an account now!</h3>
-        <button class="btn btn-info" @click="login">
-          Login
-        </button>
-      </div> -->
       <div class="card-footer" v-if="account">
         <router-link :to="{ name: 'Account', params:{id: account.id} }" :key="account.id">
           <button class="btn-block btn btn-info">

@@ -10,7 +10,6 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
-// import Post from './components/Post.vue'
 export default {
   components: {},
   setup() {

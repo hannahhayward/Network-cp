@@ -10,15 +10,7 @@
         </div>
         <div>
           <SearchResults v-for="s in results" :key="s.id" :post="s" />
-          <!-- <div v-for="r in results" :key="r">
-            <div class="bg-light text-dark">
-              <h2> {{ results.body }} </h2>
-            </div>
-          </div> -->
         </div>
-        <!-- <div class="col-2">
-          <Ad v-for="a in ads" :key="a.title" :ad="a" />
-        </div> -->
       </div>
     </div>
   </div>

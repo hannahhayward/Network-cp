@@ -1,4 +1,3 @@
-// import axios from 'axios'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
@@ -32,7 +31,6 @@ class PostService {
 
   async findPosts() {
     const res = await api.get(`api/posts?query=${AppState.currentQuery}`)
-    // AppState.posts = res.data.results.map(p => new Post(p))
     logger.log(res.data.posts, 'search results')
     AppState.searchResults = res.data.posts
     logger.log(AppState.searchResults, 'appstate')
