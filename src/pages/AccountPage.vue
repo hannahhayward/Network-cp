@@ -12,7 +12,7 @@
               <input type="text"
                      placeholder="photo url"
                      aria-label="photo url"
-                     class="form-control bg-transparent"
+                     class="form-control bg-transparent text-primary"
                      id="photo"
                      v-model="state.account.picture"
               >
